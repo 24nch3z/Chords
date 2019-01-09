@@ -13,10 +13,23 @@ class MainPresenter(
 ) : BasePresenter<MainView>() {
 
     private val chordTime = 2000L
+
+    private var isRun = false
     private var loopDisposable: Disposable? = null
 
-    fun run(progressMaxValue: Long) {
-        stopDisposable()
+    fun clickStartStopButton(progressMaxValue: Long) {
+        if (isRun) {
+            viewState?.showStoppedState()
+            stopLoop()
+        } else {
+            viewState?.showRunningState()
+            startLoop(progressMaxValue)
+        }
+        isRun = !isRun
+    }
+
+    private fun startLoop(progressMaxValue: Long) {
+        stopLoop()
         showChord()
 
         loopDisposable = Observable
@@ -30,15 +43,11 @@ class MainPresenter(
                 .subscribe(
                         { viewState?.showProgress(it.toInt()) },
                         {},
-                        { run(progressMaxValue) })
+                        { startLoop(progressMaxValue) })
         disposable.add(loopDisposable!!)
     }
 
-    fun stop() {
-        stopDisposable()
-    }
-
-    private fun stopDisposable() {
+    private fun stopLoop() {
         loopDisposable?.dispose()
         loopDisposable?.let { disposable.remove(it) }
         loopDisposable = null

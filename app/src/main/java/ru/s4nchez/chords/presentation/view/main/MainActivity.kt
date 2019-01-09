@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity(), MainView {
     @Inject
     lateinit var presenter: MainPresenter
 
-    private var isRun = false
+    private var progressMaxValue: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,19 +22,9 @@ class MainActivity : AppCompatActivity(), MainView {
         (application as App).dagger.inject(this)
         presenter.bindView(this)
 
+        progressMaxValue = resources.getInteger(R.integer.progress_max_value)
         progress_view.isEnabled = false
-
-        start_view.setOnClickListener {
-            if (isRun) {
-                start_view.setText(R.string.start)
-                presenter.stop()
-            } else {
-                start_view.setText(R.string.stop)
-                presenter.run(resources.getInteger(R.integer.progress_max_value).toLong())
-            }
-            isRun = !isRun
-            progress_view.isEnabled = isRun
-        }
+        start_view.setOnClickListener { presenter.clickStartStopButton(progressMaxValue.toLong()) }
     }
 
     override fun onDestroy() {
@@ -47,6 +37,16 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showProgress(progress: Int) {
-        progress_view.progress = Math.min(resources.getInteger(R.integer.progress_max_value), progress)
+        progress_view.progress = Math.min(progressMaxValue, progress)
+    }
+
+    override fun showRunningState() {
+        start_view.setText(R.string.stop)
+        progress_view.isEnabled = true
+    }
+
+    override fun showStoppedState() {
+        start_view.setText(R.string.start)
+        progress_view.isEnabled = false
     }
 }
