@@ -9,7 +9,7 @@ import ru.s4nchez.chords.R
 import ru.s4nchez.chords.presentation.presenter.settings.SettingsPresenter
 import javax.inject.Inject
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity(), SettingsView {
 
     @Inject
     lateinit var presenter: SettingsPresenter
@@ -18,6 +18,8 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         (application as App).dagger.inject(this)
+
+        presenter.bindView(this)
 
         /*
             От 1 секунды до 10 секунд с шагом в полсекунды

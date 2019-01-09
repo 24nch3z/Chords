@@ -11,4 +11,5 @@ interface ChordInteractor {
     fun getChord(): Single<Chord>
     fun getTimerWithProgress(progressMaxValue: Long): Flowable<Long>
     fun setChordTime(chordTime: Long): Completable
+    fun getChordTime(): Single<Long>
 }

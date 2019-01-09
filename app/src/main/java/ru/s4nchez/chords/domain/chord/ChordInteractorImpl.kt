@@ -47,4 +47,10 @@ class ChordInteractorImpl(
                 }
                 .subscribeOn(Schedulers.io())
     }
+
+    override fun getChordTime(): Single<Long> {
+        return Single
+                .fromCallable { this.chordTime }
+                .subscribeOn(Schedulers.io())
+    }
 }
