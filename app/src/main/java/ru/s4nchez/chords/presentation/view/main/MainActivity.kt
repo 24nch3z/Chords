@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         (application as App).dagger.inject(this)
+
         progressMaxValue = resources.getInteger(R.integer.progress_max_value)
         presenter.bindView(this)
         presenter.init(progressMaxValue.toLong())

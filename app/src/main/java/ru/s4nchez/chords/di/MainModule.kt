@@ -9,6 +9,7 @@ import ru.s4nchez.chords.data.chord.repository.ChordRepositoryImpl
 import ru.s4nchez.chords.domain.chord.ChordInteractor
 import ru.s4nchez.chords.domain.chord.ChordInteractorImpl
 import ru.s4nchez.chords.presentation.presenter.main.MainPresenter
+import ru.s4nchez.chords.presentation.presenter.settings.SettingsPresenter
 import javax.inject.Singleton
 
 @Module
@@ -35,5 +36,10 @@ class MainModule {
     @Provides
     fun provideMainPresenter(chordInteractor: ChordInteractor): MainPresenter {
         return MainPresenter(chordInteractor)
+    }
+
+    @Provides
+    fun provideSettingsPresenter(chordInteractor: ChordInteractor): SettingsPresenter {
+        return SettingsPresenter(chordInteractor)
     }
 }

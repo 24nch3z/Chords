@@ -10,8 +10,6 @@ class MainPresenter(
         private val chordInteractor: ChordInteractor
 ) : BasePresenter<MainView>() {
 
-    private val chordTime = 1000L
-
     private var isRun = false
     private var loopDisposable: Disposable? = null
     private var progressMaxValue: Long = 0
@@ -46,7 +44,7 @@ class MainPresenter(
         stopLoop()
         showChord()
 
-        loopDisposable = chordInteractor.getTimerWithProgress(chordTime, progressMaxValue)
+        loopDisposable = chordInteractor.getTimerWithProgress(progressMaxValue)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     viewState?.showProgress(Math.min(progressMaxValue, it).toInt())
