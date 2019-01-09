@@ -22,14 +22,16 @@ class MainActivity : AppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
 
         (application as App).dagger.inject(this)
-        presenter.bindView(this)
-
         progressMaxValue = resources.getInteger(R.integer.progress_max_value)
+        presenter.bindView(this)
+        presenter.init(progressMaxValue.toLong())
+
         progress_view.isEnabled = false
-        start_view.setOnClickListener { presenter.clickStartStopButton(progressMaxValue.toLong()) }
+        start_view.setOnClickListener { presenter.clickStartStopButton() }
 
         settings_view.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
+            presenter.stop()
         }
     }
 

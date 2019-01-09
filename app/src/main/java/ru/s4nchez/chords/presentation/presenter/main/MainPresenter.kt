@@ -10,40 +10,51 @@ class MainPresenter(
         private val chordInteractor: ChordInteractor
 ) : BasePresenter<MainView>() {
 
-    private val chordTime = 2000L
+    private val chordTime = 1000L
 
     private var isRun = false
     private var loopDisposable: Disposable? = null
+    private var progressMaxValue: Long = 0
 
-    fun clickStartStopButton(progressMaxValue: Long) {
-        if (isRun) {
-            viewState?.showStoppedState()
-            stopLoop()
-        } else {
-            viewState?.showRunningState()
-            startLoop(progressMaxValue)
-        }
-        isRun = !isRun
+    fun init(progressMaxValue: Long) {
+        this.progressMaxValue = progressMaxValue
     }
 
-    private fun startLoop(progressMaxValue: Long) {
+    fun clickStartStopButton() {
+        if (isRun) stop() else start()
+    }
+
+    fun stop() {
+        viewState?.showStoppedState()
         stopLoop()
-        showChord()
+        isRun = false
+    }
 
-        loopDisposable = chordInteractor.getTimerWithProgress(chordTime, progressMaxValue)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { viewState?.showProgress(Math.min(progressMaxValue, it).toInt()) },
-                        {},
-                        { startLoop(progressMaxValue) })
-
-        disposable.add(loopDisposable!!)
+    fun start() {
+        viewState?.showRunningState()
+        startLoop()
+        isRun = true
     }
 
     private fun stopLoop() {
         loopDisposable?.dispose()
         loopDisposable?.let { disposable.remove(it) }
         loopDisposable = null
+    }
+
+    private fun startLoop() {
+        stopLoop()
+        showChord()
+
+        loopDisposable = chordInteractor.getTimerWithProgress(chordTime, progressMaxValue)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    viewState?.showProgress(Math.min(progressMaxValue, it).toInt())
+                }, {}, {
+                    startLoop()
+                })
+
+        disposable.add(loopDisposable!!)
     }
 
     private fun showChord() {

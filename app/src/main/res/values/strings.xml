@@ -3,4 +3,7 @@
     <string name="start">Старт</string>
     <string name="stop">Стоп</string>
     <string name="settings">Установки</string>
+    <string name="exit">Выход</string>
+
+    <string name="settings_speed">Скорость: %1$s сек</string>
 </resources>

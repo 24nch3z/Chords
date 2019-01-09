@@ -4,17 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/settings_background"
-    android:padding="16dp">
+    android:orientation="vertical"
+    tools:context=".presentation.view.settings.SettingsActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:gravity="center"
+        android:padding="16dp"
         android:text="@string/settings"
         android:textAllCaps="true"
         android:textColor="@color/settings_text_color"
-        android:textSize="18dp"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/speed_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Скорость" />
+
+    <SeekBar
+        android:id="@+id/speed_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.SeekBar" />
+
+    <TextView
+        android:id="@+id/exit_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/exit"
+        android:textAllCaps="false"
+        android:textColor="@color/settings_text_color"
         tools:ignore="SpUsage" />
 
 </LinearLayout>
