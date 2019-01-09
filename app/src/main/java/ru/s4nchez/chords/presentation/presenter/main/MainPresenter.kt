@@ -12,7 +12,7 @@ class MainPresenter(
         private val chordInteractor: ChordInteractor
 ) : BasePresenter<MainView>() {
 
-    private val chordTime = 1000L
+    private val chordTime = 5000L
     private var loopDisposable: Disposable? = null
 
     fun run(progressMaxValue: Long) {

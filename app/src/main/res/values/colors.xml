@@ -3,4 +3,6 @@
     <color name="colorPrimary">#ea4335</color>
     <color name="colorPrimaryDark">#ea4335</color>
     <color name="colorAccent">#ea4335</color>
+
+    <color name="full_opacity">#00000000</color>
 </resources>

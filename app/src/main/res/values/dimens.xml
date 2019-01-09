@@ -2,4 +2,9 @@
 <resources>
     <dimen name="chord_title_size">116dp</dimen>
     <integer name="progress_max_value">1000</integer>
+
+    <dimen name="material_button_font_size">14sp</dimen>
+    <dimen name="material_button_padding">8dp</dimen>
+    <dimen name="material_button_stroke_width">2dp</dimen>
+    <dimen name="material_button_corner_radius">4dp</dimen>
 </resources>
