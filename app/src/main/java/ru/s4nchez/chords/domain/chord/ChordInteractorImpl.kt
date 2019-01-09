@@ -2,7 +2,7 @@ package ru.s4nchez.chords.domain.chord
 
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import ru.s4nchez.chords.data.chord.ChordRepository
+import ru.s4nchez.chords.data.chord.repository.ChordRepository
 import ru.s4nchez.chords.data.chord.model.Chord
 import java.util.concurrent.TimeUnit
 

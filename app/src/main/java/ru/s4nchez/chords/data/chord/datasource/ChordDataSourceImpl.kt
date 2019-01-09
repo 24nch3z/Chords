@@ -1,10 +1,9 @@
-package ru.s4nchez.chords.data.chord
+package ru.s4nchez.chords.data.chord.datasource
 
-import io.reactivex.Single
 import ru.s4nchez.chords.data.chord.model.Chord
 import java.util.*
 
-class ChordRepositoryImpl : ChordRepository {
+class ChordDataSourceImpl : ChordDataSource {
 
     private val majorChords = arrayListOf(
             Chord("C"),
@@ -33,18 +32,11 @@ class ChordRepositoryImpl : ChordRepository {
             Chord("A7"),
             Chord("B7"))
 
-    private val chords = ArrayList<Chord>()
-
-    init {
+    override fun getChords(): List<Chord> {
+        val chords = ArrayList<Chord>()
         chords.addAll(majorChords)
         chords.addAll(minorChords)
         chords.addAll(seventhChords)
-    }
-
-    override fun getRandomChord(): Single<Chord> {
-        return Single.create {
-            chords.shuffle()
-            it.onSuccess(chords[0])
-        }
+        return chords
     }
 }
