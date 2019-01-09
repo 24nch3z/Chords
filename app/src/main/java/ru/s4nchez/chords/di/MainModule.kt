@@ -33,7 +33,6 @@ class MainModule {
     }
 
     @Provides
-    @Singleton
     fun provideMainPresenter(chordInteractor: ChordInteractor): MainPresenter {
         return MainPresenter(chordInteractor)
     }

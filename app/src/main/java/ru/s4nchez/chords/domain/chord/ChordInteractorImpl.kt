@@ -1,5 +1,6 @@
 package ru.s4nchez.chords.domain.chord
 
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -19,5 +20,18 @@ class ChordInteractorImpl(
 
     override fun getChord(): Single<Chord> {
         return chordRepository.getRandomChord()
+    }
+
+    override fun getTimerWithProgress(chordTime: Long, progressMaxValue: Long): Flowable<Long> {
+        return Flowable
+                .intervalRange(
+                        0L,
+                        progressMaxValue,
+                        0L,
+                        chordTime / progressMaxValue,
+                        TimeUnit.MILLISECONDS
+                )
+                .onBackpressureBuffer()
+                .subscribeOn(Schedulers.io())
     }
 }

@@ -1,12 +1,10 @@
 package ru.s4nchez.chords.presentation.presenter.main
 
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import ru.s4nchez.chords.domain.chord.ChordInteractor
 import ru.s4nchez.chords.presentation.presenter.BasePresenter
 import ru.s4nchez.chords.presentation.view.main.MainView
-import java.util.concurrent.TimeUnit
 
 class MainPresenter(
         private val chordInteractor: ChordInteractor
@@ -32,18 +30,13 @@ class MainPresenter(
         stopLoop()
         showChord()
 
-        loopDisposable = Observable
-                .intervalRange(
-                        0L,
-                        progressMaxValue,
-                        0L,
-                        chordTime / progressMaxValue,
-                        TimeUnit.MILLISECONDS
-                )
+        loopDisposable = chordInteractor.getTimerWithProgress(chordTime, progressMaxValue)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { viewState?.showProgress(it.toInt()) },
                         {},
                         { startLoop(progressMaxValue) })
+
         disposable.add(loopDisposable!!)
     }
 
