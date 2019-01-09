@@ -1,7 +1,7 @@
 package ru.s4nchez.chords.presentation.view.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.s4nchez.chords.App
 import ru.s4nchez.chords.R
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
         (application as App).dagger.inject(this)
         presenter.bindView(this)
-        presenter.start()
+        presenter.run(resources.getInteger(R.integer.progress_max_value).toLong())
     }
 
     override fun onDestroy() {
@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showChord(chord: String) {
-        chordView.text = chord
+        chord_view.text = chord
+    }
+
+    override fun showProgress(progress: Int) {
+        progress_view.progress = Math.min(resources.getInteger(R.integer.progress_max_value), progress)
     }
 }

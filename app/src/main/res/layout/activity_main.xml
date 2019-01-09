@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="32dp">
 
     <TextView
-        android:id="@+id/chordView"
+        android:id="@+id/chord_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/chord_title_size"
-        tool:text="Am"/>
+        tool:text="Am" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top">
+
+        <SeekBar
+            android:id="@+id/progress_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="@integer/progress_max_value"
+            tool:progress="@integer/progress_max_value" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true" />
+    </FrameLayout>
 
 </FrameLayout>

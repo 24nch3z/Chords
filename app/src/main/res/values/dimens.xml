@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="chord_title_size">116dp</dimen>
+    <integer name="progress_max_value">1000</integer>
 </resources>
