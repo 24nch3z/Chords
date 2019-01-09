@@ -33,7 +33,7 @@ class MainPresenter(
         loopDisposable = chordInteractor.getTimerWithProgress(chordTime, progressMaxValue)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { viewState?.showProgress(it.toInt()) },
+                        { viewState?.showProgress(Math.min(progressMaxValue, it).toInt()) },
                         {},
                         { startLoop(progressMaxValue) })
 

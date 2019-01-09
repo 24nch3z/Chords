@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showProgress(progress: Int) {
-        progress_view.progress = Math.min(progressMaxValue, progress)
+        progress_view.progress = progress
     }
 
     override fun showRunningState() {
