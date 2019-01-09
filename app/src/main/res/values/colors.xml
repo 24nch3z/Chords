@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#ea4335</color>
-    <color name="colorPrimaryDark">#ea4335</color>
-    <color name="colorAccent">#ea4335</color>
+    <color name="colorPrimaryDark">@color/colorPrimary</color>
+    <color name="colorAccent">@color/colorPrimary</color>
 
     <color name="full_opacity">#00000000</color>
+    <color name="icon_color">#FFFFFFFF</color>
+
+    <!-- Настройки -->
+    <color name="settings_background">@color/colorPrimary</color>
+    <color name="settings_text_color">#FFFFFFFF</color>
 </resources>

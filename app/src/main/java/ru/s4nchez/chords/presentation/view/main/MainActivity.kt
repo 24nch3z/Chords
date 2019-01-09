@@ -1,11 +1,13 @@
 package ru.s4nchez.chords.presentation.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.s4nchez.chords.App
 import ru.s4nchez.chords.R
 import ru.s4nchez.chords.presentation.presenter.main.MainPresenter
+import ru.s4nchez.chords.presentation.view.settings.SettingsActivity
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -25,6 +27,10 @@ class MainActivity : AppCompatActivity(), MainView {
         progressMaxValue = resources.getInteger(R.integer.progress_max_value)
         progress_view.isEnabled = false
         start_view.setOnClickListener { presenter.clickStartStopButton(progressMaxValue.toLong()) }
+
+        settings_view.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
     }
 
     override fun onDestroy() {

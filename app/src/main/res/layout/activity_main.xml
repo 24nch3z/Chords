@@ -1,47 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/chord_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/chord_title_size"
-        tool:ignore="SpUsage"
-        tool:text="Am" />
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top">
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:padding="16dp">
 
-        <SeekBar
-            android:id="@+id/progress_view"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/settings_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:max="@integer/progress_max_value"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            tool:progress="@integer/progress_max_value" />
+            android:layout_gravity="right"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_settings"
+            android:focusable="true" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/chord_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/chord_title_size"
+            tool:ignore="SpUsage"
+            tool:text="Am" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="true" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="top">
+
+            <SeekBar
+                android:id="@+id/progress_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="@integer/progress_max_value"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                tool:progress="@integer/progress_max_value" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true" />
+        </FrameLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/start_view"
+            style="@style/MaterialButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:text="@string/start" />
+
     </FrameLayout>
 
-    <com.google.android.material.button.MaterialButton
-        style="@style/MaterialButton"
-        android:id="@+id/start_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:text="@string/start"/>
-
-</FrameLayout>
+</LinearLayout>
