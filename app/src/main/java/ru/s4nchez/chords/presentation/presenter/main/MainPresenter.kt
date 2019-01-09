@@ -12,13 +12,11 @@ class MainPresenter(
         private val chordInteractor: ChordInteractor
 ) : BasePresenter<MainView>() {
 
-    private val chordTime = 5000L
+    private val chordTime = 2000L
     private var loopDisposable: Disposable? = null
 
     fun run(progressMaxValue: Long) {
-        loopDisposable?.dispose()
-        loopDisposable?.let { disposable.remove(it) }
-        loopDisposable = null
+        stopDisposable()
         showChord()
 
         loopDisposable = Observable
@@ -34,6 +32,16 @@ class MainPresenter(
                         {},
                         { run(progressMaxValue) })
         disposable.add(loopDisposable!!)
+    }
+
+    fun stop() {
+        stopDisposable()
+    }
+
+    private fun stopDisposable() {
+        loopDisposable?.dispose()
+        loopDisposable?.let { disposable.remove(it) }
+        loopDisposable = null
     }
 
     private fun showChord() {

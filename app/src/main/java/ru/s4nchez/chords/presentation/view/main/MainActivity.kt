@@ -1,6 +1,7 @@
 package ru.s4nchez.chords.presentation.view.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.s4nchez.chords.App
@@ -16,9 +17,23 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         (application as App).dagger.inject(this)
         presenter.bindView(this)
-        presenter.run(resources.getInteger(R.integer.progress_max_value).toLong())
+
+        progress_view.isEnabled = false
+        start_view.setOnClickListener {
+            start_view.visibility = View.GONE
+            stop_view.visibility = View.VISIBLE
+            progress_view.isEnabled = true
+            presenter.run(resources.getInteger(R.integer.progress_max_value).toLong())
+        }
+        stop_view.setOnClickListener {
+            start_view.visibility = View.VISIBLE
+            stop_view.visibility = View.GONE
+            progress_view.isEnabled = false
+            presenter.stop()
+        }
     }
 
     override fun onDestroy() {
