@@ -6,6 +6,7 @@ import ru.s4nchez.chords.data.chord.datasource.ChordDataSource
 import ru.s4nchez.chords.data.chord.datasource.ChordDataSourceImpl
 import ru.s4nchez.chords.data.chord.repository.ChordRepository
 import ru.s4nchez.chords.data.chord.repository.ChordRepositoryImpl
+import ru.s4nchez.chords.data.shared.SharedPrefHelper
 import ru.s4nchez.chords.domain.chord.ChordInteractor
 import ru.s4nchez.chords.domain.chord.ChordInteractorImpl
 import ru.s4nchez.chords.presentation.presenter.main.MainPresenter
@@ -17,8 +18,8 @@ class MainModule {
 
     @Provides
     @Singleton
-    fun provideChordDataSource(): ChordDataSource {
-        return ChordDataSourceImpl()
+    fun provideChordDataSource(sharedPrefHelper: SharedPrefHelper): ChordDataSource {
+        return ChordDataSourceImpl(sharedPrefHelper)
     }
 
     @Provides

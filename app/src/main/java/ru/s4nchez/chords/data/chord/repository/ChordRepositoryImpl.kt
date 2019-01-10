@@ -9,7 +9,6 @@ class ChordRepositoryImpl(
         private val chordDataSource: ChordDataSource
 ) : ChordRepository {
 
-    private var chordTime = 2000L
     private val chords = chordDataSource.getChords()
 
     override fun getRandomChord(): Single<Chord> {
@@ -20,13 +19,10 @@ class ChordRepositoryImpl(
     }
 
     override fun setChordTime(chordTime: Long): Completable {
-        return Completable.create {
-            this.chordTime = chordTime
-            it.onComplete()
-        }
+        return chordDataSource.setChordTime(chordTime)
     }
 
     override fun getChordTime(): Single<Long> {
-        return Single.fromCallable { chordTime }
+        return chordDataSource.getChordTime()
     }
 }

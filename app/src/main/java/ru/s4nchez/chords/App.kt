@@ -1,6 +1,7 @@
 package ru.s4nchez.chords
 
 import android.app.Application
+import ru.s4nchez.chords.di.AppModule
 import ru.s4nchez.chords.di.DaggerMainComponent
 import ru.s4nchez.chords.di.MainComponent
 import ru.s4nchez.chords.di.MainModule
@@ -13,6 +14,7 @@ class App : Application() {
         super.onCreate()
         dagger = DaggerMainComponent.builder()
                 .mainModule(MainModule())
+                .appModule(AppModule(this))
                 .build()
     }
 }
