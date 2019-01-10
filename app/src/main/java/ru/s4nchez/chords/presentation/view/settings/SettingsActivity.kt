@@ -8,6 +8,7 @@ import ru.s4nchez.chords.App
 import ru.s4nchez.chords.R
 import ru.s4nchez.chords.convertFromSeekBarProgressToSeconds
 import ru.s4nchez.chords.presentation.presenter.settings.SettingsPresenter
+import java.util.*
 import javax.inject.Inject
 
 class SettingsActivity : AppCompatActivity(), SettingsView {
@@ -41,7 +42,8 @@ class SettingsActivity : AppCompatActivity(), SettingsView {
     }
 
     override fun showChordTimeInSeconds(seconds: Double) {
-        speed_text_view.text = getString(R.string.settings_speed, String.format("%.1f", seconds))
+        speed_text_view.text = getString(R.string.settings_speed,
+                String.format(Locale.US, "%.1f", seconds))
     }
 
     override fun setSeekBarProgress(progress: Int) {
