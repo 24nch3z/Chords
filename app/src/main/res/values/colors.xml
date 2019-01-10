@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">@color/colorPrimary</color>
     <color name="colorAccent">@color/colorPrimary</color>
 
+    <color name="text_color_primary">#ea4335</color>
+    <color name="text_color_inverse">#FFFFFFFF</color>
+
     <color name="full_opacity">#00000000</color>
     <color name="icon_color">#FFFFFFFF</color>
 
