@@ -23,7 +23,7 @@ class SettingsActivity : AppCompatActivity(), SettingsView {
         (application as App).dagger.inject(this)
         presenter.bindView(this)
 
-        speed_view.max = 18
+        speed_view.max = 9
         speed_view.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -41,9 +41,8 @@ class SettingsActivity : AppCompatActivity(), SettingsView {
         exit_view.setOnClickListener { finish() }
     }
 
-    override fun showChordTimeInSeconds(seconds: Double) {
-        speed_text_view.text = getString(R.string.settings_speed,
-                String.format(Locale.US, "%.1f", seconds))
+    override fun showChordTimeInSeconds(seconds: Int) {
+        speed_text_view.text = getString(R.string.settings_speed, seconds)
     }
 
     override fun setSeekBarProgress(progress: Int) {
