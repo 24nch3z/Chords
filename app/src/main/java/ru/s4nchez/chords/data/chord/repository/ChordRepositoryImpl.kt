@@ -9,12 +9,31 @@ class ChordRepositoryImpl(
         private val chordDataSource: ChordDataSource
 ) : ChordRepository {
 
-    private val chords = chordDataSource.getChords()
+    private var chords: List<Chord>
+    private var chordIndex: Int
+
+    init {
+        chords = chordDataSource.getChords()
+        (chords as ArrayList).shuffle()
+        chordIndex = 0
+    }
 
     override fun getRandomChord(): Single<Chord> {
         return Single.create {
-            (chords as ArrayList).shuffle()
-            it.onSuccess(chords[0])
+            val chord = chords[chordIndex]
+            if (chordIndex >= chords.size - 1) {
+                (chords as ArrayList).shuffle()
+            }
+            shiftIndex()
+            it.onSuccess(chord)
+        }
+    }
+
+    private fun shiftIndex() {
+        if (chordIndex >= chords.size - 1) {
+            chordIndex = 0
+        } else {
+            chordIndex++
         }
     }
 
