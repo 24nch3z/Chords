@@ -1,8 +1,10 @@
 package ru.s4nchez.chords.data.shared
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 
+@SuppressLint("ApplySharedPref")
 class SharedPrefHelper(private val context: Context) {
 
     private val sharedPref: SharedPreferences
@@ -15,7 +17,7 @@ class SharedPrefHelper(private val context: Context) {
     fun save(value: Long, key: String) {
         val editor = sharedPref.edit()
         editor.putLong(key, value)
-        editor.apply()
+        editor.commit()
     }
 
     fun getLong(key: String, defaultValue: Long) = sharedPref.getLong(key, defaultValue)
