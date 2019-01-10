@@ -31,6 +31,7 @@ class ChordInteractorImpl(
                 .subscribeOn(Schedulers.io())
     }
 
+    // TODO: Поправить: Если число секунд не целое число, идёт округление (1.5 -> 1.0)
     private fun timer(chordTime: Long, progressMaxValue: Long): Flowable<Long> {
         return Flowable
                 .intervalRange(
