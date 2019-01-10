@@ -1,5 +1,7 @@
 package ru.s4nchez.chords
 
+// TODO: Где-то баг: идёт округление до целого
+
 fun convertFromSeekBarProgressToChordTime(progress: Int): Long {
     return ((progress + 2.0) * 500).toLong()
 }
