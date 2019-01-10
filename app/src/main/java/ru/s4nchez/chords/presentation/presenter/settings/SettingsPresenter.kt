@@ -1,6 +1,9 @@
 package ru.s4nchez.chords.presentation.presenter.settings
 
 import io.reactivex.android.schedulers.AndroidSchedulers
+import ru.s4nchez.chords.convertFromChordTimeToSeconds
+import ru.s4nchez.chords.convertFromChordTimeToSeekBarProgress
+import ru.s4nchez.chords.convertFromSeekBarProgressToChordTime
 import ru.s4nchez.chords.domain.chord.ChordInteractor
 import ru.s4nchez.chords.presentation.presenter.BasePresenter
 import ru.s4nchez.chords.presentation.view.settings.SettingsView
@@ -9,21 +12,22 @@ class SettingsPresenter(
         private val chordInteractor: ChordInteractor
 ) : BasePresenter<SettingsView>() {
 
-    /*
-        0 - 1.0 sec
-        1 - 1.5 sec
-        2 - 2.0 sec
-        3 - 2.5 sec
-     */
+    override fun bindView(view: SettingsView) {
+        super.bindView(view)
+        val d = chordInteractor.getChordTime()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    viewState?.showChordTimeInSeconds(convertFromChordTimeToSeconds(it))
+                    viewState?.setSeekBarProgress(convertFromChordTimeToSeekBarProgress(it))
+                }, {})
+        disposable.add(d)
+    }
+
     fun setChordTime(progress: Int) {
-        val chordTime: Long = convertFromSeekBarProgressToSeconds(progress)
+        val chordTime: Long = convertFromSeekBarProgressToChordTime(progress)
 
         chordInteractor.setChordTime(chordTime)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
-    }
-
-    private fun convertFromSeekBarProgressToSeconds(progress: Int): Long {
-        return (((progress + 2.0) / 2.0) * 1000).toLong()
     }
 }
